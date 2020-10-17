@@ -1,0 +1,33 @@
+{
+  "name": "curli-monitoring-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./bin/index.ts",
+  "scripts": {
+    "start": "ts-node -r dotenv/config ./bin/index.ts",
+    "dev": "nodemon -r dotenv/config ./bin/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alireza-Kiani/curli-monitoring-tools.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alireza-Kiani/curli-monitoring-tools/issues"
+  },
+  "homepage": "https://github.com/Alireza-Kiani/curli-monitoring-tools#readme",
+  "dependencies": {
+    "@types/express": "^4.17.8",
+    "@types/node-fetch": "^2.5.7",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
