@@ -12,6 +12,8 @@ class ApiController {
             const fetch: Fetch = await ApiService.saveLink(stats, link);
             return res.status(200).send({ stats });
         } catch (error) {
+            console.log(error);
+            
             return res.status(400).send({ error: error.message });
         }
     }
@@ -23,6 +25,8 @@ class ApiController {
             const fetch: Fetch = await ApiService.saveSite(stats, domain);
             return res.status(200).send({ message: 'Saved successfully' });
         } catch (error) {
+            console.log(error);
+            
             return res.status(400).send({ error: error.message });
         }
     }
