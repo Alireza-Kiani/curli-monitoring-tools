@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import ApiService from './service';
+import ApiService, { Fetch } from './service';
 import Statistics from '../stats';
 import { LinkMonitor } from '../@types/input';
 
@@ -17,8 +17,12 @@ class ApiController {
 
     saveSite: RequestHandler = async (req, res) => {
         try {
+            console.log(req.body);
+            
             const stats = new Statistics(req.body);
-            await ApiService.saveSite(stats);
+            const fetch: Fetch = await ApiService.saveSite(stats);
+            console.log(fetch.parsed_response);
+            
             return res.status(200).send({ message: 'Saved successfully' });
         } catch (error) {
             return res.status(400).send({ error: error.message });

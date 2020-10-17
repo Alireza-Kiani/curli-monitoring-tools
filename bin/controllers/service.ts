@@ -2,7 +2,7 @@ import fetch, { Response, RequestInit } from 'node-fetch';
 import { LinkMonitor } from '../@types/input';
 import Statistics from '../stats';
 
-class Fetch {
+export class Fetch {
     private _options: RequestInit | undefined;
     private _url: string;
     private _raw_response: Response | null = null;
@@ -45,14 +45,16 @@ class ApiService {
         this._API_VERSION = process.env.API_VERSION;
     }
 
-    async saveLink(input: Statistics): Promise<void> {
+    async saveLink(input: Statistics): Promise<Fetch> {
         const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorLink`, 'POST', input);
-        return await req.fire();
+        await req.fire();
+        return req;
     }
 
-    async saveSite(input: Statistics): Promise<void> {
+    async saveSite(input: Statistics): Promise<Fetch> {
         const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorSite`, 'POST', input);
-        return await req.fire();
+        await req.fire();
+        return req;
     }
 
     async getLinkStats(link: string, field: string): Promise<LinkMonitor[]> {
