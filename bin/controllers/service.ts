@@ -12,7 +12,7 @@ export class Fetch {
         if (method === 'POST') {
             this._options = {
                 method: 'POST',
-                body: JSON.stringify({ ...body }),
+                body: JSON.stringify(body),
                 headers: {
                     'content-type': 'application/json'
                 },
@@ -45,14 +45,14 @@ class ApiService {
         this._API_VERSION = process.env.API_VERSION;
     }
 
-    async saveLink(input: Statistics): Promise<Fetch> {
-        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorLink`, 'POST', input);
+    async saveLink(input: Statistics, link: string): Promise<Fetch> {
+        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorLink`, 'POST', { link, data: input });
         await req.fire();
         return req;
     }
 
-    async saveSite(input: Statistics): Promise<Fetch> {
-        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorSite`, 'POST', input);
+    async saveSite(input: Statistics, domain: string): Promise<Fetch> {
+        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorSite`, 'POST', { domain, data: input });
         await req.fire();
         return req;
     }

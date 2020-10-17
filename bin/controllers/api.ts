@@ -7,8 +7,9 @@ class ApiController {
 
     saveLink: RequestHandler = async (req, res) => {
         try {
+            const link: string = req.body.link;
             const stats = new Statistics(req.body);
-            const fetch: Fetch = await ApiService.saveLink(stats);
+            const fetch: Fetch = await ApiService.saveLink(stats, link);
             return res.status(200).send({ stats });
         } catch (error) {
             return res.status(400).send({ error: error.message });
@@ -17,8 +18,9 @@ class ApiController {
 
     saveSite: RequestHandler = async (req, res) => {
         try {
+            const domain: string = req.body.domain;
             const stats = new Statistics(req.body);
-            const fetch: Fetch = await ApiService.saveSite(stats);
+            const fetch: Fetch = await ApiService.saveSite(stats, domain);
             return res.status(200).send({ message: 'Saved successfully' });
         } catch (error) {
             return res.status(400).send({ error: error.message });

@@ -53,6 +53,14 @@ class Statistics {
         return this._agent;
     }
 
+    toJSON() {
+        return {
+            useragent: this._agent,
+            ip: this._ip,
+            totalViews: this._view_count,
+            individualCount: [...this._individual_view_count]
+        };
+    }
 }
 
 
