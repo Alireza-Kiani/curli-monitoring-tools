@@ -40,19 +40,23 @@ class Fetch {
 }
 
 class ApiService {
+    private _API_VERSION;
+    constructor() {
+        this._API_VERSION = process.env.API_VERSION;
+    }
 
     async saveLink(input: Statistics): Promise<void> {
-        const req = new Fetch('http://curli.ir:8083/monitorLink', 'POST', input);
+        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorLink`, 'POST', input);
         return await req.fire();
     }
 
     async saveSite(input: Statistics): Promise<void> {
-        const req = new Fetch('http://curli.ir:8083/monitorSite', 'POST', input);
+        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorSite`, 'POST', input);
         return await req.fire();
     }
 
     async getLinkStats(link: string, field: string): Promise<LinkMonitor[]> {
-        const req = new Fetch(`http://curli.ir:8083/monitor/${link}?field=${field}`, 'GET');
+        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitor/${link}?field=${field}`, 'GET');
         await req.fire();
         return req.parsed_response;
     }
