@@ -41,24 +41,26 @@ export class Fetch {
 
 class ApiService {
     private _API_VERSION;
+    private _REDIS_SERVICE_PORT;
     constructor() {
         this._API_VERSION = process.env.API_VERSION;
+        this._REDIS_SERVICE_PORT = process.env.REDIS_SERVICE_PORT;
     }
 
     async saveLink(input: Statistics, link: string): Promise<Fetch> {
-        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorLink`, 'POST', { link, data: input });
+        const req = new Fetch(`http://curli.ir:${this._REDIS_SERVICE_PORT}/api/v${this._API_VERSION}/monitorLink`, 'POST', { link, data: input });
         await req.fire();
         return req;
     }
 
     async saveSite(input: Statistics, domain: string): Promise<Fetch> {
-        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitorSite`, 'POST', { domain, data: input });
+        const req = new Fetch(`http://curli.ir:${this._REDIS_SERVICE_PORT}/api/v${this._API_VERSION}/monitorSite`, 'POST', { domain, data: input });
         await req.fire();
         return req;
     }
 
     async getLinkStats(link: string, field: string): Promise<LinkMonitor[]> {
-        const req = new Fetch(`http://curli.ir:8083/api/v${this._API_VERSION}/monitor/${link}?field=${field}`, 'GET');
+        const req = new Fetch(`http://curli.ir:${this._REDIS_SERVICE_PORT}/api/v${this._API_VERSION}/monitor/${link}?field=${field}`, 'GET');
         await req.fire();
         return req.parsed_response;
     }
